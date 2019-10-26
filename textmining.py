@@ -6,7 +6,9 @@ response=urllib.request.urlopen(url)
 data=response.read()
 text=data.decode('utf-8')
 words=text.split()
+#words is a list of all words in the Gutenberg text
 d=dict()
+#determining the most frequently used words in the text (excluding stop words)
 for word in words:
     strippables=string.punctuation+string.whitespace
     word=word.strip(strippables)
@@ -16,8 +18,10 @@ for word in words:
         d[word]=1
     else:
         d[word]+=1
+#d stores words (keys) and frequencies (outputs)
 t=[]
 e=dict()
+#e will store the stop words 
 excluding_stopwords=True
 stopwords_list=open('stopwords.txt')
 for line in stopwords_list:
@@ -30,11 +34,13 @@ for word, frequency in d.items():
     else:
         t.append((frequency,word))
 t.sort(reverse=True)
+#returns the top x most frequent words (excluding words in the stopword list), based on what integer you enter. 
 number=int(input('Enter an integer.'))
 print('The',number, 'most frequent words in this text are:')
 for frequency,word in t[:number]:
     print(word, '\t', frequency)
 
+#sentiment analysis using nltk
 import nltk
 nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
