@@ -1,7 +1,7 @@
 import urllib.request
 import random
 import string
-url='http://www.gutenberg.org/cache/epub/16328/pg16328.txt'
+url='http://www.gutenberg.org/files/1342/1342-0.txt'
 response=urllib.request.urlopen(url)
 data=response.read()
 text=data.decode('utf-8')
@@ -47,43 +47,18 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 score=SentimentIntensityAnalyzer().polarity_scores(text)
 print(score)
 
-#hist={}
-#filename='Beowulf.txt'
-#fp=filename.decode('utf-8')
-#print(fp)
+#text similarity using sklearn 
+import sklearn
+from sklearn.feature_extraction.text import TfidfVectorizer
+#text files variable stores the two texts I want to analyze
+text_files=['Beowulf.txt' and 'Pride and Prejudice.txt']
+#documents reads all the texts
+documents=[open(f) for f in text_files]
+print(type(documents))
+#compute tfidf vectors from the texts
+tfidf=TfidfVectorizer().fit_transform(documents)
+pairwise_similarity=tfidf*tfidf.T 
+print(pairwise_similarity)
 
-#def skip_gutenberg_header(fp):
-        #for line in fp:
-            #if line.startswith('*** START OF THIS PROJECT'):
-                #break
-#skip_gutenberg_header(fp)
-
-#def process_file(filename,skip_header):
-    #if skip_header:
-        #skip_gutenberg_header(fp)
-    #for line in fp:
-        #if line.startswith('*** END OF THIS PROJECT'):
-            #break
-        #for word in line.split():
-        #if word not in hist:
-            #hist[word]=1
-        #else:
-            #hist[word]+=1
-#print(hist)
-
-#process_file(filename,skip_header=True)
-
-#def most_common(hist,excluding_stopwords=True):
-    #t=[]
-    #stopwords=process_file('stopwords.txt',False)
-    #stopwords=list(stopwords.keys())
-    #print(stopwords)
-    #for letter,freq in hist.items():
-        #if excluding_stopwords:
-            #if word in stopwords:
-                #continue 
-        #t.append((freq,word))
-
-#most_common(hist,excluding_stopwords=True)
 
 
