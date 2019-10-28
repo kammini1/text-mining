@@ -1,6 +1,7 @@
 import urllib.request
 import random
 import string
+#download text from Gutenberg project, decoding
 url='http://www.gutenberg.org/files/1342/1342-0.txt'
 response=urllib.request.urlopen(url)
 data=response.read()
