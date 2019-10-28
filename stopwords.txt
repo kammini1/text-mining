@@ -13,6 +13,7 @@ are
 aren't
 as
 at
+author
 be
 because
 been
@@ -27,6 +28,7 @@ can't
 cannot
 could
 couldn't
+date
 did
 didn't
 do
@@ -37,10 +39,12 @@ don't
 down
 during
 each
+ebook
 few
 for
 from
 further
+gutenberg
 had
 hadn't
 has
@@ -76,6 +80,7 @@ it
 it's
 its
 itself
+language
 let's
 me
 more
@@ -95,10 +100,13 @@ or
 other
 ought
 our
-ours 	ourselves
+ours 	
+ourselves
 out
 over
 own
+project
+release
 same
 shan't
 she
@@ -130,11 +138,13 @@ they've
 this
 those
 through
+title
 to
 too
 under
 until
 up
+updated
 very
 was
 wasn't

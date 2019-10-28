@@ -24,6 +24,7 @@ e=dict()
 #e will store the stop words 
 excluding_stopwords=True
 stopwords_list=open('stopwords.txt')
+#I have modified stopwords.txt to add in words commonly used in the Gutenberg header and footer. 
 for line in stopwords_list:
     stopwords=line.strip()
     if stopwords not in e:
@@ -51,14 +52,33 @@ print(score)
 import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
 #text files variable stores the two texts I want to analyze
-text_files=['Beowulf.txt' and 'Pride and Prejudice.txt']
+text_files=['Beowulf.txt', 'Pride and Prejudice.txt','Frankenstein.txt','A Modest Proposal.txt','poe.txt']
 #documents reads all the texts
-documents=[open(f) for f in text_files]
-print(type(documents))
+documents=[open(f, encoding='utf8').read() for f in text_files]
 #compute tfidf vectors from the texts
 tfidf=TfidfVectorizer().fit_transform(documents)
 pairwise_similarity=tfidf*tfidf.T 
-print(pairwise_similarity)
+print(pairwise_similarity.toarray())
 
+#text clustering
+import numpy as np 
+from sklearn.manifold import MDS
+import matplotlib.pyplot as plt 
 
+# s variable stores the similarities calculated in previous text similarity section
+s=np.asarray([[1.,         0.75435797, 0.84884674, 0.7946772,  0.73382239],
+[0.75435797, 1.,         0.87361434, 0.79423915, 0.50519677],
+[0.84884674, 0.87361434, 1.,         0.84815379, 0.63301119],
+[0.7946772,  0.79423915, 0.84815379, 1.,         0.61001115],
+[0.73382239, 0.50519677, 0.63301119, 0.61001115, 1.        ]])
+dissimilarities=1-s
 
+# compute the embedding
+coord = MDS(dissimilarity='precomputed').fit_transform(dissimilarities)
+
+plt.scatter(coord[:, 0], coord[:, 1])
+
+# Label the points
+for i in range(coord.shape[0]):
+    plt.annotate(str(i), (coord[i, :]))
+plt.show()
