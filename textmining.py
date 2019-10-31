@@ -1,3 +1,4 @@
+#download text from gutenberg and decode the utf-8 format 
 import urllib.request
 import random
 import string
@@ -5,8 +6,9 @@ url=input('Enter the url of the Gutenberg text you want to analyze.')
 response=urllib.request.urlopen(url)
 data=response.read()
 text=data.decode('utf-8')
-words=text.split()
+
 #words is a list of all words in the Gutenberg text
+words=text.split()
 
 def most_common_words(url):
     d=dict()
